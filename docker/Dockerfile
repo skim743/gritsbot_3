@@ -9,8 +9,8 @@ COPY .git-credentials /root/.git-credentials
 RUN apk update && apk upgrade
 
 # Get python + deps.  Most of these are actually for netifaces install
-#RUN apk add --no-cache git python3 python3-dev py3-pip gcc musl-dev linux-headers
-RUN apk add git python3 python3-dev py3-pip gcc musl-dev linux-headers
+RUN apk add --no-cache git python3 python3-dev py3-pip gcc musl-dev linux-headers
+#RUN apk add git python3 python3-dev py3-pip gcc musl-dev linux-headers
 
 RUN git config --global credential.helper store
 
