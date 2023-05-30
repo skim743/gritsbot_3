@@ -7,23 +7,13 @@ This section details how to make the base image.  Relatively few changes are mad
 ## 1 - Load the RPi image onto an SD card
 Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
 
-## 2 - Raspi Config
+## 2 - Disable Unused Services
 
 Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' Click on it to look up its IP address. After looking up the IP address of the new Pi, ssh to it by
 ```
 ssh pi@<IP-address-of-Pi>
 ```
 When promted to enter password, type 'raspberry'
-
-Then, launch
-
-```
-sudo raspi-config
-```
-
-Disable the **SSH console options, splash, and waiting for network on boot.** Enable **boot to the CLI**.  Remain SSHd to the RPi for the next steps.
-
-## 3 - Disable Unused Services 
 
 Add to /boot/config.txt the text
 
