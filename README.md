@@ -9,7 +9,7 @@ Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager.
 
 ## 2 - Raspi Config
 
-Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser. After looking up the IP address of the new Pi, ssh to it by
+Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). After looking up the IP address of the new Pi, ssh to it by
 ```
 ssh pi@<IP-address-of-Pi>
 ```
