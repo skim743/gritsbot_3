@@ -5,7 +5,7 @@
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
 
 ## 1 - Load the RPi image onto an SD card
-Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
+Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
 
 ## 2 - Raspi Config
 
