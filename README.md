@@ -13,7 +13,7 @@ Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the l
 ```
 ssh pi@<IP-address-of-Pi>
 ```
-When promted to enter password, tpye 'raspberry'
+When promted to enter password, type 'raspberry'
 
 Then, launch
 
