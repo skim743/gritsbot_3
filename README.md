@@ -5,54 +5,15 @@
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
 
 ## 1 - Load the RPi image onto an SD card
+Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
 
-Install latest Raspbian lite to an SD card.  Your .zip file may have a different name. Now, connect the SD card to your computer and unmount it with 
+## 2 - Disable Unused Services
+
+Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' Click on it to look up its IP address. After looking up the IP address of the new Pi, ssh to it by
 ```
-umount /dev/<your card>
-``` 
-
-You can see the card (probably) with 
+ssh pi@<IP-address-of-Pi>
 ```
-lsblk
-```
-
-```
-unzip -p 2018-10-09-raspbian-stretch-lite.zip | sudo dd status=progress of=/dev/sdX bs=4M conv=fsync 
-```
- 
-Navigate to boot partition.  Place ssh, and wpa\_supplicant.conf files in boot partition.
-
-```
-cd <path_to>/boot
-touch ssh 
-touch wpa_supplicant.conf
-```
-
-Now, edit the wpa\_supplicant.conf file to something like the following.  Example WPA supplicant file:
-
-```
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=US
-
-network={
-     ssid="Your network name/SSID"
-     psk="Your WPA/WPA2 security key"
-     key_mgmt=WPA-PSK
-}
-```
-
-## 2 - Raspi Config
-
-Boot the PI and ssh to it.  Then, launch
-
-```
-sudo raspi-config
-```
-
-Disable the **SSH console options, splash, and waiting for network on boot.** Enable **boot to the CLI**.  Remain SSHd to the RPi for the next steps.
-
-## 3 - Disable Unused Services 
+When promted to enter password, type 'raspberry'
 
 Add to /boot/config.txt the text
 
@@ -101,7 +62,7 @@ sudo apt-get remove docker docker-engine docker.io
 Next, install Docker using the convenience script.
 
 ```
-curl -fsSL get.docker.com -o get-docker.sh && export VERSION=18.06 && sh get-docker.sh
+curl -fsSL get.docker.com -o get-docker.sh && export VERSION=23.0 && sh get-docker.sh
 ```
 
 Now tie Docker to the pi user so that we don't need sudo to use Docker.

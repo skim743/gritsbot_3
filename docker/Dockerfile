@@ -10,6 +10,10 @@ RUN apk update && apk upgrade
 
 # Get python + deps.  Most of these are actually for netifaces install
 RUN apk add --no-cache git python3 python3-dev py3-pip gcc musl-dev linux-headers
+<<<<<<< HEAD
+=======
+#RUN apk add git python3 python3-dev py3-pip gcc musl-dev linux-headers
+>>>>>>> 31403f7bcc225da6fe1eb45c890bf424473aff1f
 
 RUN git config --global credential.helper store
 
