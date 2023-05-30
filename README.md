@@ -6,32 +6,16 @@ This section details how to make the base image.  Relatively few changes are mad
 
 ## 1 - Load the RPi image onto an SD card
 Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
- 
-Navigate to boot partition.  Place ssh, and wpa\_supplicant.conf files in boot partition.
-
-```
-cd <path_to>/boot
-touch ssh 
-touch wpa_supplicant.conf
-```
-
-Now, edit the wpa\_supplicant.conf file to something like the following.  Example WPA supplicant file:
-
-```
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=US
-
-network={
-     ssid="Your network name/SSID"
-     psk="Your WPA/WPA2 security key"
-     key_mgmt=WPA-PSK
-}
-```
 
 ## 2 - Raspi Config
 
-Boot the PI and ssh to it.  Then, launch
+Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser. After looking up the IP address of the new Pi, ssh to it by
+```
+ssh pi@<IP-address-of-Pi>
+```
+When promted to enter password, tpye 'raspberry'
+
+Then, launch
 
 ```
 sudo raspi-config
