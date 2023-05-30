@@ -4,21 +4,7 @@
 
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
 
-## 1 - Load the RPi image onto an SD card
-
-Install latest Raspbian lite to an SD card.  Your .zip file may have a different name. Now, connect the SD card to your computer and unmount it with 
-```
-umount /dev/<your card>
-``` 
-
-You can see the card (probably) with 
-```
-lsblk
-```
-
-```
-unzip -p 2018-10-09-raspbian-stretch-lite.zip | sudo dd status=progress of=/dev/sdX bs=4M conv=fsync 
-```
+## 1 - Load the RPi image onto an SD card using Raspberry Pi Imager.
  
 Navigate to boot partition.  Place ssh, and wpa\_supplicant.conf files in boot partition.
 
@@ -101,7 +87,7 @@ sudo apt-get remove docker docker-engine docker.io
 Next, install Docker using the convenience script.
 
 ```
-curl -fsSL get.docker.com -o get-docker.sh && export VERSION=18.06 && sh get-docker.sh
+curl -fsSL get.docker.com -o get-docker.sh && export VERSION=23.0 && sh get-docker.sh
 ```
 
 Now tie Docker to the pi user so that we don't need sudo to use Docker.
