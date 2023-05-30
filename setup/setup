@@ -46,14 +46,14 @@ print_start "$STR"
 cd /home/pi
 mkdir git
 cd git
-git clone https://github.com/robotarium/gritsbot_2
+git clone https://github.oit.uci.edu/robotecologylab/gritsbot_2
 git clone https://github.com/robotarium/mac_discovery
 print_end "$STR"
 
 STR="STARTING CONTAINERS"
 print_start "$STR"
 cd /home/pi/git/gritsbot_2/docker
-sudo ./docker_run.sh
+#sudo ./docker_run.sh
 sudo ./docker_watch.sh
 cd /home/pi/git/mac_discovery/docker
 sudo ./docker_run.sh
