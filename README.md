@@ -15,6 +15,12 @@ ssh pi@<IP-address-of-Pi>
 ```
 When promted to enter password, type 'raspberry'
 
+Open /boot/config.txt file by
+
+```
+sudo nano /boot/config.txt
+```
+
 Add to /boot/config.txt the text
 
 ```
@@ -28,7 +34,11 @@ This section assumes that you have built a base image as previously detailed.
 
 ## 1 - Automatic Installation
 
-To install the firmware automatically, move the setup script to the directory /home/pi on the SD card.  Then, place the script setup\_service in the /etc/init.d directory.  When the pi starts, the items in this section will be automatically executed; then, the script deletes itself.  The log for the installation process can be viewed at /var/log/setup\_firmware.log
+To install the firmware automatically, run the setup script by
+
+```
+./setup
+```
 
 ## 2 - Manual Installation
 
