@@ -15,6 +15,12 @@ ssh pi@<IP-address-of-Pi>
 ```
 When promted to enter password, type 'raspberry'
 
+Open /boot/config.txt file by
+
+```
+sudo nano /boot/config.txt
+```
+
 Add to /boot/config.txt the text
 
 ```
