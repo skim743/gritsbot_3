@@ -42,6 +42,7 @@ sudo python3 -m pip install pyserial
 print_end "$STR"
 
 STR="CLONING GIT REPOS"
+git config --global credential.helper store
 print_start "$STR"
 cd /home/pi
 mkdir git
@@ -53,7 +54,7 @@ print_end "$STR"
 STR="STARTING CONTAINERS"
 print_start "$STR"
 cd /home/pi/git/gritsbot_2/docker
-#sudo ./docker_run.sh
+sudo ./docker_run.sh
 sudo ./docker_watch.sh
 cd /home/pi/git/mac_discovery/docker
 sudo ./docker_run.sh
