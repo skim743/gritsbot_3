@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker tag robotarium:firmware robotarium/firmware
-docker push robotarium/firmware
+docker tag robotecology:firmware robotecology/firmware
+docker push robotecology/firmware

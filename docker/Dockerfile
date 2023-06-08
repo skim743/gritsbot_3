@@ -1,10 +1,9 @@
+FROM multiarch/qemu-user-static:x86_64-arm as qemu # Needed for building the image on a computer instead on a Raspberry Pi
 FROM arm32v6/alpine
-
-#COPY qemu-arm-static /usr/bin
+COPY --from=qemu /usr/bin/qemu-arm-static /usr/bin # Needed for building the image on a computer instead on a Raspberry Pi
 
 #TODO find a better place to put .git-credentials
 COPY .git-credentials /root/.git-credentials
-
 
 RUN apk update && apk upgrade
 
@@ -13,11 +12,12 @@ RUN apk add --no-cache git python3 python3-dev py3-pip gcc musl-dev linux-header
 
 RUN git config --global credential.helper store
 
+# Install Vizier
 ADD https://api.github.com/repos/robotarium/vizier/git/refs/heads/master version.json
 RUN git clone https://github.com/robotarium/vizier
 RUN cd vizier && python3 -m pip install .
 
-#ADD https://api.github.com/repos/robotarium/gritsbot_2/git/refs/heads/master version.json
+# Install firmware
 RUN git clone https://github.oit.uci.edu/robotecologylab/gritsbot_2
 RUN cd gritsbot_2 && python3 -m pip install .
 
