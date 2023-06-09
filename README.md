@@ -1,7 +1,10 @@
 # Setup Process for the gritsbot\_2
 
 # 1 - Program Teensy
-Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering 'arduino' on a terminal or clicking 'Show Applications' icon on the bottom left corner of the screen) and open 'defaultOperation.ino' located in '~/git/gritsbotx/firmware/teensyCode' directory. Then, click the upload icon (right arrow icon).
+1. Connect a Teensy to the main computer using a micro-USB cable. 
+2. Open Arduino IDE (by either entering 'arduino' on a terminal or clicking 'Show Applications' icon on the bottom left corner of the screen)
+3. Open 'defaultOperation.ino' located in '~/git/gritsbotx/firmware/teensyCode' directory.
+4. Click the upload icon (right arrow icon).
 
 # 2 - Make the Base Image for Raspberry Pi
 
@@ -16,12 +19,23 @@ This section details how to make the base image.  Relatively few changes are mad
 6. Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.'
 7. Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.'
 8. Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
-9. Eject the card from the computer and insert it onto a Raspberry Pi and power it up.
+
+## 2 - Register the RPi as a Robot
+Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then, on the main computer,
+1. Add/Replace the MAC address of the Raspberry Pi in '~/git/gritsbot_2/config/mac_list.json'
+2. Add/Replace the robot ID in '~/git/vicon_tracker_python/config/node_desc_tracker.json'
+3. Add/Replace the robot ID in '~/git/robotarium_matlab_backend/config/node_desc_api.json'
+4. Build the firmware Docker image by running
+```
+cd ~/git/gritsbot_2/docker/
+./docker_build.sh 192.168.1.5 1884
+```
+- When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
+- When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
+
+## 3 - Setup the RPi
+1. Eject the card from the computer and insert it onto a Raspberry Pi and power it up.
 It should automatically connect to the wifi. The Pi needs some time to boot for the first time. The boot up process can be visually inspected by plugging the Raspberry Pi to a monitor through a mini HDMI cable. When the Pi completes the booting process it will prompt a login. If the Pi shows a blue screen prompting to enter a new username, something is wrong with uploading the image to Pi, and the Raspbian OS needs to be reinstalled. Before loading another image to the SD card, make sure to re-type the passwords for the Pi and the Wifi. The Raspberry Pi Imager seems to be ruining the passwords saved in the advanced setting when the program is restarted.
-
-## 2 - Setup the RPi
-
-1. Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router.
 2. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' 
 3. Click on it to look up its IP address and MAC address. 
 4. After looking up the IP address of the new Pi, ssh to it by
@@ -42,19 +56,6 @@ sudo nano /boot/config.txt
 # Disable bluetooth
 dtoverlay=pi3-disable-bt
 ```
-
-## 3 - Register the RPi as a Robot
-Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then, on the main computer,
-1. Add/Replace the MAC address of the Raspberry Pi in '~/git/gritsbot_2/config/mac_list.json'
-2. Add/Replace the robot ID in '~/git/vicon_tracker_python/config/node_desc_tracker.json'
-3. Add/Replace the robot ID in '~/git/robotarium_matlab_backend/config/node_desc_api.json'
-4. Build the firmware Docker image by running
-```
-cd ~/git/gritsbot_2/docker/
-./docker_build.sh 192.168.1.5 1884
-```
-- When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
-- When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
 
 # 3 - Automated Setup
 
