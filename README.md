@@ -1,23 +1,18 @@
 # Setup Process for the gritsbot\_2
 
-# 1 - Upload the Code to Teensy
-Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering "arduino" on a terminal or clicking "Show Applications" icon on the bottom left corner of the screen) and open "defaultOperation.ino. Then, click the upload icon (right arrow icon).
+# 1 - Program Teensy
+Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering "arduino" on a terminal or clicking "Show Applications" icon on the bottom left corner of the screen) and open "defaultOperation.ino" located in "~/git/gritsbotx/firmware/teensyCode" directory. Then, click the upload icon (right arrow icon).
 
-When adding/replacing robots,
-1. Add/Replace the MAC address of the robots in "~/git/gritsbot_2/config/mac_list.json"
-2. 
-
-
-# 1 - Making the Base Image
+# 2 - Make the Base Image for Raspberry Pi
 
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
 
 ## 1 - Load the RPi image onto an SD card
 Install (https://www.raspberrypi.com/software/) and run the Raspberry Pi Imager. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).' For 'Storage,' choose the SD card to be used. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.' Check 'Enable SSH' and 'Use password authentication.' Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.' Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.' Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
 
-## 2 - Disable Unused Services
+## 2 - Setup the RPi
 
-Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' Click on it to look up its IP address. After looking up the IP address of the new Pi, ssh to it by
+Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' Click on it to look up its IP address and MAC address. After looking up the IP address of the new Pi, ssh to it by
 ```
 ssh pi@<IP-address-of-Pi>
 ```
@@ -36,17 +31,45 @@ Add to /boot/config.txt the text
 dtoverlay=pi3-disable-bt
 ```
 
+## 3 - Register the RPi as a Robot
+Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then, on the main computer,
+1. Add/Replace the MAC address of the Raspberry Pi in "~/git/gritsbot_2/config/mac_list.json"
+2. Add/Replace the robot ID in "~/git/vicon_tracker_python/config/node_desc_tracker.json"
+3. Add/Replace the robot ID in "~/git/robotarium_matlab_backend/config/node_desc_api.json"
+4. Build the firmware Docker image by running
+```
+cd ~/git/gritsbot_2/docker/
+./docker_build.sh 192.168.1.5 1884
+```
+When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
+
 # 2 - Automated Setup
 
 This section assumes that you have built a base image as previously detailed.
 
 ## 1 - Automatic Installation
 
-To install the firmware automatically, run the setup script by
+To install the firmware automatically, copy ".git-credentials" in "~/git/gritsbot_2/docker" directory and "setup" in "~/git/gritsbot_2/setup" directory to "rootfs/home/pi" directory of the SD card.
+
+Eject the card from the computer and insert it onto a Raspberry Pi and power it up. It should automatically connect to the wifi. The Pi needs some time to boot for the first time. The boot up process can be visually inspected by plugging the Raspberry Pi to a monitor through a mini HDMI cable. When the Pi completes the booting process it will prompt a login. If the Pi shows a blue screen prompting to enter a new username, something is wrong with Step 1, and the Raspbian OS needs to be reinstalled. Before loading another image to the Pi, make sure to re-type the passwords for the Pi and the Wifi. The Raspberry Pi Imager seems to be ruining the passwords saved in the advanced setting when the program is restarted.
+
+On the Pi, run the setup script with
 
 ```
 ./setup
 ```
+
+This can be done either by directly on the Pi by connecting a mini HDMI cable and a keyboard to the Pi or SSHing to the Pi as instructed in Step 2.2.
+
+## 2 - Network Host Name Change
+This process changes the name of the Raspberry Pi on the network. This helps to identify each robot easily on the router page (192.168.1.1). See Step 2, if you forgot how to access the router page.
+
+After the setup script is completed,
+Run
+```
+sudo rasp-config
+``
+on the Raspberry Pi, and change the Host Name to "robot#" where # is the new robot index assigned to the Pi in Step 2.3
 
 ## 2 - Manual Installation
 
