@@ -43,13 +43,13 @@ cd ~/git/gritsbot_2/docker/
 ```
 When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
 
-# 2 - Automated Setup
+# 3 - Automated Setup
 
 This section assumes that you have built a base image as previously detailed.
 
 ## 1 - Automatic Installation
 
-To install the firmware automatically, copy ".git-credentials" in "~/git/gritsbot_2/docker" directory and "setup" in "~/git/gritsbot_2/setup" directory to "rootfs/home/pi" directory of the SD card.
+To install the firmware automatically, copy ".git-credentials" in "\~/git/gritsbot_2/docker" directory and "setup" in "\~/git/gritsbot_2/setup" directory to "rootfs/home/pi" directory of the SD card.
 
 Eject the card from the computer and insert it onto a Raspberry Pi and power it up. It should automatically connect to the wifi. The Pi needs some time to boot for the first time. The boot up process can be visually inspected by plugging the Raspberry Pi to a monitor through a mini HDMI cable. When the Pi completes the booting process it will prompt a login. If the Pi shows a blue screen prompting to enter a new username, something is wrong with Step 1, and the Raspbian OS needs to be reinstalled. Before loading another image to the Pi, make sure to re-type the passwords for the Pi and the Wifi. The Raspberry Pi Imager seems to be ruining the passwords saved in the advanced setting when the program is restarted.
 
@@ -71,7 +71,7 @@ sudo rasp-config
 ``
 on the Raspberry Pi, and change the Host Name to "robot#" where # is the new robot index assigned to the Pi in Step 2.3
 
-## 2 - Manual Installation
+## 3 - Manual Installation
 
 This section details the installation process for the firmware.  This process can be made automatic via the setup scripts.
 
