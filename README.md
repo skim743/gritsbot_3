@@ -1,7 +1,7 @@
 # Setup Process for the gritsbot\_2
 
 # 1 - Program Teensy
-Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering "arduino" on a terminal or clicking "Show Applications" icon on the bottom left corner of the screen) and open "defaultOperation.ino" located in "~/git/gritsbotx/firmware/teensyCode" directory. Then, click the upload icon (right arrow icon).
+Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering 'arduino' on a terminal or clicking 'Show Applications' icon on the bottom left corner of the screen) and open 'defaultOperation.ino' located in '~/git/gritsbotx/firmware/teensyCode' directory. Then, click the upload icon (right arrow icon).
 
 # 2 - Make the Base Image for Raspberry Pi
 
@@ -42,15 +42,16 @@ dtoverlay=pi3-disable-bt
 
 ## 3 - Register the RPi as a Robot
 Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then, on the main computer,
-1. Add/Replace the MAC address of the Raspberry Pi in "~/git/gritsbot_2/config/mac_list.json"
-2. Add/Replace the robot ID in "~/git/vicon_tracker_python/config/node_desc_tracker.json"
-3. Add/Replace the robot ID in "~/git/robotarium_matlab_backend/config/node_desc_api.json"
+1. Add/Replace the MAC address of the Raspberry Pi in '~/git/gritsbot_2/config/mac_list.json'
+2. Add/Replace the robot ID in '~/git/vicon_tracker_python/config/node_desc_tracker.json'
+3. Add/Replace the robot ID in '~/git/robotarium_matlab_backend/config/node_desc_api.json'
 4. Build the firmware Docker image by running
 ```
 cd ~/git/gritsbot_2/docker/
 ./docker_build.sh 192.168.1.5 1884
 ```
-When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
+- When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
+- When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
 
 # 3 - Automated Setup
 
@@ -58,9 +59,11 @@ This section assumes that you have built a base image as previously detailed.
 
 ## 1 - Automatic Installation
 
-To install the firmware automatically, copy ".git-credentials" in "\~/git/gritsbot_2/docker" directory and "setup" in "\~/git/gritsbot_2/setup" directory to "rootfs/home/pi" directory of the SD card.
+1. Copy '.git-credentials' in '\~/git/gritsbot_2/docker' directory and 'setup' in '\~/git/gritsbot_2/setup' directory to 'rootfs/home/pi' directory of the SD card.
 
-On the Pi, run the setup script with
+2. Connect the Pi and Teensy with a USB cable. If the Pi is not connected with a programmed Teensy as instructed in Step 1, the firmware will not successfully be started by the setup script in the next step.
+
+3. On the Pi, run the setup script with
 
 ```
 ./setup
@@ -69,14 +72,19 @@ On the Pi, run the setup script with
 This can be done either by directly on the Pi by connecting a mini HDMI cable and a keyboard to the Pi or SSHing to the Pi as instructed in Step 2.2.
 
 ## 2 - Network Host Name Change
-This process changes the name of the Raspberry Pi on the network. This helps to identify each robot easily on the router page (192.168.1.1). See Step 2, if you forgot how to access the router page.
+This process changes the name of the Raspberry Pi on the network. This helps to identify each robot easily on the router page (192.168.1.1). See Step 2.2, if you forgot how to access the router page.
 
 After the setup script is completed,
 Run
 ```
 sudo rasp-config
 ```
-on the Raspberry Pi, and change the Host Name to "robot#" where # is the new robot index assigned to the Pi in Step 2.3
+on the Raspberry Pi, and change the Host Name to 'robot#' where # is the new robot index assigned to the Pi in Step 2.3.
+
+Reboot the Pi to apply the new network host name by selecting 'yes' when the raspi-config asks for a restart, or by using
+```
+sudo reboot
+```
 
 ## 3 - Manual Installation
 
