@@ -8,32 +8,35 @@ Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE 
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
 
 ## 1 - Load the RPi image onto an SD card
-- Install and run the Raspberry Pi Imager (https://www.raspberrypi.com/software/).
-- For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).'
-- For 'Storage,' choose the SD card to be used.
-- Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.'
-- Check 'Enable SSH' and 'Use password authentication.'
-- Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.'
-- Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.'
-- Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
-- Eject the card from the computer and insert it onto a Raspberry Pi and power it up.
+1. Install and run the Raspberry Pi Imager (https://www.raspberrypi.com/software/).
+2. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).'
+3. For 'Storage,' choose the SD card to be used.
+4. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.'
+5. Check 'Enable SSH' and 'Use password authentication.'
+6. Then, check 'Set username and password' and type 'pi' for the 'Username' and 'raspberry' for 'Password.'
+7. Next, check 'Configure wireless LAN' and type 'RobotEcologyLab' for 'SSID' and 'NoMoGrits4Me' for 'Password.'
+8. Change 'Wireless LAN country' to 'US.' Click 'SAVE' and click 'WRITE' button to start loading the image to the SD card.
+9. Eject the card from the computer and insert it onto a Raspberry Pi and power it up.
 It should automatically connect to the wifi. The Pi needs some time to boot for the first time. The boot up process can be visually inspected by plugging the Raspberry Pi to a monitor through a mini HDMI cable. When the Pi completes the booting process it will prompt a login. If the Pi shows a blue screen prompting to enter a new username, something is wrong with uploading the image to Pi, and the Raspbian OS needs to be reinstalled. Before loading another image to the SD card, make sure to re-type the passwords for the Pi and the Wifi. The Raspberry Pi Imager seems to be ruining the passwords saved in the advanced setting when the program is restarted.
 
 ## 2 - Setup the RPi
 
-Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' Click on it to look up its IP address and MAC address. After looking up the IP address of the new Pi, ssh to it by
+1. Boot the Pi and ssh to it. You can lookup the IP address of the Pi through the lab router.
+2. Navigate to the router settings page by navigating to '192.168.1.1' using a web browser (admin credential for the router is currently saved in Firefox). The new Pi will appear as 'RASPBERRYPI.' 
+3. Click on it to look up its IP address and MAC address. 
+4. After looking up the IP address of the new Pi, ssh to it by
 ```
 ssh pi@<IP-address-of-Pi>
 ```
 When promted to enter password, type 'raspberry'
 
-Open /boot/config.txt file by
+5. Open /boot/config.txt file by
 
 ```
 sudo nano /boot/config.txt
 ```
 
-Add to /boot/config.txt the text
+6. Add to /boot/config.txt the text
 
 ```
 # Disable bluetooth
