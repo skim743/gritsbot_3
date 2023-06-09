@@ -68,7 +68,7 @@ After the setup script is completed,
 Run
 ```
 sudo rasp-config
-``
+```
 on the Raspberry Pi, and change the Host Name to "robot#" where # is the new robot index assigned to the Pi in Step 2.3
 
 ## 3 - Manual Installation
