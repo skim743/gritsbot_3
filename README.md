@@ -73,15 +73,15 @@ This section assumes that you have built a base image as previously detailed.
 ./setup
 ```
 
-This can be done either by directly on the Pi by connecting a mini HDMI cable and a keyboard to the Pi or SSHing to the Pi as instructed in Step 2.2.
+This can be done either by directly on the Pi by connecting a mini HDMI cable and a keyboard to the Pi or SSHing to the Pi as instructed in Step 2.3.
 
 ## 2 - Network Host Name Change
-This process changes the name of the Raspberry Pi on the network. This helps to identify each robot easily on the router page (192.168.1.1). See Step 2.2, if you forgot how to access the router page.
+This process changes the name of the Raspberry Pi on the network. This helps to identify each robot easily on the router page (192.168.1.1). See Step 2.3, if you forgot how to access the router page.
 
 After the setup script is completed,
 Run
 ```
-sudo rasp-config
+sudo raspi-config
 ```
 on the Raspberry Pi, and change the Host Name to 'robot#' where # is the new robot index assigned to the Pi in Step 2.3.
 
