@@ -1,5 +1,13 @@
 # Setup Process for the gritsbot\_2
 
+# 1 - Upload the Code to Teensy
+Connect a Teensy to the main computer using a micro-USB cable. Open Arduino IDE (by either entering "arduino" on a terminal or clicking "Show Applications" icon on the bottom left corner of the screen) and open "defaultOperation.ino. Then, click the upload icon (right arrow icon).
+
+When adding/replacing robots,
+1. Add/Replace the MAC address of the robots in "~/git/gritsbot_2/config/mac_list.json"
+2. 
+
+
 # 1 - Making the Base Image
 
 This section details how to make the base image.  Relatively few changes are made to keep the image small.  Once the changes in this section have been made, copy the new image to an SD card and use that as the base image.
