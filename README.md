@@ -12,7 +12,7 @@ This section details how to make the base image.  Relatively few changes are mad
 
 ## 1 - Load the RPi image onto an SD card
 1. Install and run the Raspberry Pi Imager (https://www.raspberrypi.com/software/).
-2. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (32-bit).'
+2. For 'Operating System,' select 'Raspberry Pi OS (other)' and select 'Raspberry Pi OS Lite (64-bit).'
 3. For 'Storage,' choose the SD card to be used.
 4. Before clicking the 'WRITE' button, click on the gear icon below the 'WRTIE' button to open the 'Advanced options.'
 5. Check 'Enable SSH' and 'Use password authentication.'
