@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker tag robotecology:firmware robotecology/firmware
-docker push robotecology/firmware
+docker tag gritsbot3:firmware skim743/firmware
+docker push skim743/firmware
