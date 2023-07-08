@@ -22,13 +22,13 @@ This section details how to make the base image.  Relatively few changes are mad
 
 ## 2 - Register the RPi as a Robot
 Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then, on the main computer,
-1. Add/Replace the MAC address of the Raspberry Pi in '~/git/gritsbot_2/config/mac_list.json'
+1. Add/Replace the MAC address of the Raspberry Pi in '~/git/gritsbot_3/config/mac_list.json'
 2. Add/Replace the robot ID in '~/git/vicon_tracker_python/config/node_desc_tracker.json'
 3. Add/Replace the robot ID in '~/git/robotarium_matlab_backend/config/node_desc_api.json'
 4. Build the firmware Docker image by running
 ```
-cd ~/git/gritsbot_2/docker/
-./docker_build.sh 192.168.1.5 1884
+cd ~/git/gritsbot_3/docker/
+./docker_build.sh <192.168.1.8> <1884>
 ```
 - When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
 - When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
@@ -63,7 +63,7 @@ This section assumes that you have built a base image as previously detailed.
 
 ## 1 - Automatic Installation
 
-1. Copy '.git-credentials' in '\~/git/gritsbot_2/docker' directory and 'setup' in '\~/git/gritsbot_2/setup' directory to 'rootfs/home/pi' directory of the SD card.
+1. Copy '.git-credentials' in '\~/git/gritsbot_3/docker' directory and 'setup' in '\~/git/gritsbot_3/setup' directory to 'rootfs/home/pi' directory of the SD card.
 
 2. Connect the Pi and Teensy with a USB cable. If the Pi is not connected with a programmed Teensy as instructed in Step 1, the firmware will not successfully be started by the setup script in the next step.
 
