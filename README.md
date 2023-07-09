@@ -28,7 +28,7 @@ Assign an unallocated robot index for the MAC address of the Raspberry Pi. Then,
 4. Build the firmware Docker image by running
 ```
 cd ~/git/gritsbot_3/docker/
-./docker_build.sh <192.168.1.8> <1884>
+./docker_build.sh 192.168.1.8 1884
 ```
 - When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
 - When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
