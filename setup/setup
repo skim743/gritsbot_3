@@ -53,7 +53,7 @@ print_end "$STR"
 
 STR="STARTING CONTAINERS"
 print_start "$STR"
-cd /home/pi/git/gritsbot_2/docker
+cd /home/pi/git/gritsbot_3/docker
 sudo ./docker_run.sh
 sudo ./docker_watch.sh
 cd /home/pi/git/mac_discovery/docker
