@@ -224,7 +224,7 @@ def main():
     started = False
     serial = None
     while (not started):
-        serial = gritsbotserial.GritsbotSerial(serial_dev='/dev/ttyACM0', baud_rate=500000)
+        serial = gritsbotserial.GritsbotSerial(serial_dev='/dev/ttyAMA0', baud_rate=500000)
         try:
             serial.start()
             started = True

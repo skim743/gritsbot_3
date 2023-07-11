@@ -56,7 +56,7 @@ class GritsbotSerial:
 
     """
 
-    def __init__(self, serial_dev='/dev/ttyACM0', baud_rate=500000, timeout=2):
+    def __init__(self, serial_dev='/dev/ttyAMA0', baud_rate=500000, timeout=2):
         """Creates the serial communciations object.
 
         Args:
