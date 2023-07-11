@@ -1,4 +1,4 @@
-# Setup Process for the gritsbot\_2
+# Setup Process for the gritsbot\_3
 
 # 1 - Program Teensy
 1. Connect a Teensy to the main computer using a micro-USB cable. 
@@ -31,7 +31,7 @@ cd ~/git/gritsbot_3/docker/
 ./docker_build.sh 192.168.1.8 1884
 ```
 - When making making multiple robots, register the MAC address of all new robots in the files listed above before building the firmware image. Otherwise, the firmware needs to be built as many as the number of new robots.
-- When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots.
+- When assigning an index to a new robot,  assign the number engraved on the Vicon hat plate. Make sure not to use any numbers that are assigned to existing robots. For more information about generating Vicon hats, see https://github.com/skim743/gritsbotx_vicon_hats
 
 ## 3 - Setup the RPi
 1. Eject the card from the computer and insert it onto a Raspberry Pi and power it up.
