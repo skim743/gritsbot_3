@@ -280,12 +280,14 @@ bool GritsbotX::checkCharging(){
 }
 
 float GritsbotX::checkBattVoltage(){
-  // //Determines if the robot is charging its battery
-  // float input = analogRead(_battVoltage);
+  //Determines if the robot is charging its battery
+  float input = analogRead(_battVoltage);
 
-  // //Scale the reading from the voltage divider to determine the correct reading.
-  // float battVoltage = input * 3.3/1023.0 * ((5.0+15.0)/15.0);
-  float battVoltage = ina260.readBusVoltage();
+  //Scale the reading from the voltage divider to determine the correct reading.
+  float battVoltage = input * 3.3/1023.0 * ((5.0+15.0)/15.0);
+
+  // Read battery voltage from INA260
+  // float battVoltage = ina260.readBusVoltage();
   return battVoltage;
 }
 
