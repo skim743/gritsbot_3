@@ -326,6 +326,9 @@ def main():
             # If we should have responses, but we don't
             if(len(handlers) > 0):
                 logger.critical('Malformed response ({})'.format(response))
+                logger.info('Length of handlers ({})'.format(len(handlers)))
+                logger.info('Length of status ({})'.format(len(response['status'])))
+                logger.info('Length of body ({})'.format(len(response['body'])))
 
         robot_node.put(status_link, json.dumps(status_data))
 
