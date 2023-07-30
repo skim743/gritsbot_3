@@ -322,22 +322,25 @@ def main():
             # Ensure the appropriate handler gets each response
             for i, handler in enumerate(handlers):
                 status_data.update(handler(status[i], body[i]))
+            logger.info('Status data ({})'.format(status_data))
+            logger.info('Response ({})'.format(response))
+            logger.info('Length of handlers ({})'.format(len(handlers)))
         else:
             # If we should have responses, but we don't
             if(len(handlers) > 0):
                 logger.critical('Malformed response ({})'.format(response))
                 logger.info('Length of handlers ({})'.format(len(handlers)))
-                logger.info('Length of handlers ({})'.format(handlers))
+                # logger.info('Length of handlers ({})'.format(handlers))
                 # logger.info('Length of status ({})'.format(len(response['status'])))
                 # logger.info('Length of body ({})'.format(len(response['body'])))
 
         robot_node.put(status_link, json.dumps(status_data))
 
         # Print out status data
-        if((start_time - print_time) >= status_update_rate):
-            logger.info('Status data ({})'.format(status_data))
-            logger.info('Last input message received ({})'.format(last_input_msg))
-            print_time = time.time()
+        # if((start_time - print_time) >= status_update_rate):
+        #     logger.info('Status data ({})'.format(status_data))
+        #     logger.info('Last input message received ({})'.format(last_input_msg))
+        #     print_time = time.time()
 
         # Sleep for whatever time is left at the end of the loop
         time.sleep(max(0, update_rate - (time.time() - start_time)))
