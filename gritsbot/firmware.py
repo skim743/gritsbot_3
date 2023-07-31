@@ -307,6 +307,7 @@ def main():
         # Write to serial port
         response = None
         if(len(handlers) > 0):
+            serial._serial.reset_input_buffer()
             try:
                 response = serial.serial_request(request.to_json_encodable())
             except Exception as e:

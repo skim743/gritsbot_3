@@ -173,8 +173,6 @@ class GritsbotSerial:
                 logger.warning('Unable to parse JSON message from serial port')
                 logger.warning(repr(e))
 
-            self._serial.reset_input_buffer()
-
             return result
 
     def start(self, timeout=5):
