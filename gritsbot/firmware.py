@@ -309,7 +309,6 @@ def main():
         if(len(handlers) > 0):
             try:
                 response = serial.serial_request(request.to_json_encodable())
-                serial.reset_output_buffer()
             except Exception as e:
                 logger.critical('Serial exception.')
                 logger.critical(e)

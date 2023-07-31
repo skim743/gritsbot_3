@@ -129,6 +129,8 @@ class GritsbotSerial:
                 self._needs_restart = True
                 self._serial_cv.notify_all()
                 raise RuntimeError(error_msg)
+            
+            self._serial.reset_output_buffer()
 
             # Read to wait for bytes to be available
             try:
