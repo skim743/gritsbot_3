@@ -117,7 +117,6 @@ class GritsbotSerial:
                     raise RuntimeError(error_msg)
 
             msg = _json_to_bytes(msg)
-            self._serial.reset_input_buffer()
 
             try:
                 self._serial.write(msg)
@@ -173,6 +172,8 @@ class GritsbotSerial:
             except Exception as e:
                 logger.warning('Unable to parse JSON message from serial port')
                 logger.warning(repr(e))
+
+            self._serial.reset_input_buffer()
 
             return result
 
