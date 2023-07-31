@@ -116,8 +116,8 @@ class GritsbotSerial:
                     logger.critical(error_msg)
                     raise RuntimeError(error_msg)
 
-            self._serial.reset_output_buffer()
             msg = _json_to_bytes(msg)
+            self._serial.reset_input_buffer()
 
             try:
                 self._serial.write(msg)
