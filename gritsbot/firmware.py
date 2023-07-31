@@ -237,6 +237,7 @@ def main():
         time.sleep(1)
 
     logger.info('Acquired serial device.')
+    time.sleep(4)
 
     # Queues for STREAM links
     inputs = robot_node.subscribe(input_link)
