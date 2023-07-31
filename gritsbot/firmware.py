@@ -258,7 +258,6 @@ def main():
         request = Request()
         handlers = []
 
-        serial._serial.reset_input_buffer()
         serial._serial.reset_output_buffer()
 
         # Retrieve status data: battery voltage and charging status
@@ -309,7 +308,7 @@ def main():
 
         # Write to serial port
         response = None
-        if(len(handlers) > 0):
+        if(len(handlers) > 0 and serial._serial.is_open):
             try:
                 response = serial.serial_request(request.to_json_encodable())
             except Exception as e:
