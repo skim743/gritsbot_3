@@ -238,13 +238,6 @@ def main():
 
     logger.info('Acquired serial device.')
 
-    # Discard the first two readings from the serial
-    request = Request()
-    request.add_read_request('batt_volt').add_read_request('charge_status')
-    serial.serial_request(request.to_json_encodable())
-    request.add_read_request('batt_volt').add_read_request('charge_status')
-    serial.serial_request(request.to_json_encodable())
-
     # Queues for STREAM links
     inputs = robot_node.subscribe(input_link)
 
@@ -316,6 +309,7 @@ def main():
         if(len(handlers) > 0):
             try:
                 response = serial.serial_request(request.to_json_encodable())
+                serial.reset_output_buffer()
             except Exception as e:
                 logger.critical('Serial exception.')
                 logger.critical(e)
