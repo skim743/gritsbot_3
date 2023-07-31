@@ -237,7 +237,13 @@ def main():
         time.sleep(1)
 
     logger.info('Acquired serial device.')
-    time.sleep(4)
+
+    # Discard the first two readings from the serial
+    request = Request()
+    request.add_read_request('batt_volt').add_read_request('charge_status')
+    serial.serial_request(request.to_json_encodable())
+    request.add_read_request('batt_volt').add_read_request('charge_status')
+    serial.serial_request(request.to_json_encodable())
 
     # Queues for STREAM links
     inputs = robot_node.subscribe(input_link)
