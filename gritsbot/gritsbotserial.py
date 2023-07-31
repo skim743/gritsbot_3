@@ -129,8 +129,6 @@ class GritsbotSerial:
                 self._needs_restart = True
                 self._serial_cv.notify_all()
                 raise RuntimeError(error_msg)
-            
-            self._serial.reset_output_buffer()
 
             # Read to wait for bytes to be available
             try:
@@ -174,6 +172,8 @@ class GritsbotSerial:
             except Exception as e:
                 logger.warning('Unable to parse JSON message from serial port')
                 logger.warning(repr(e))
+
+            self._serial.reset_output_buffer()
 
             return result
 
