@@ -132,7 +132,8 @@ class GritsbotSerial:
 
             # Read to wait for bytes to be available
             try:
-                msg = self._serial.read()
+                # msg = self._serial.read()
+                msg = self._serial.read(self._serial.in_waiting)
             except Exception as e:
                 error_msg = 'Unable to read from serial port'
                 logger.critical(error_msg)
@@ -154,17 +155,17 @@ class GritsbotSerial:
 
             # Once bytes are available, read the rest in.  We assume that the entire message is on
             # the line
-            try:
-                msg += self._serial.read(self._serial.in_waiting)
-            except Exception as e:
-                error_msg = 'Unable to read from the serial port.'
-                logger.critical(error_msg)
-                logger.critical(repr(e))
+            # try:
+            #     msg += self._serial.read(self._serial.in_waiting)
+            # except Exception as e:
+            #     error_msg = 'Unable to read from the serial port.'
+            #     logger.critical(error_msg)
+            #     logger.critical(repr(e))
 
-                # Signal the serial_task thread that the serial device should be restarted
-                self._needs_restart = True
-                self._serial_cv.notify_all()
-                raise RuntimeError(error_msg)
+            #     # Signal the serial_task thread that the serial device should be restarted
+            #     self._needs_restart = True
+            #     self._serial_cv.notify_all()
+            #     raise RuntimeError(error_msg)
 
             result = None
             try:
