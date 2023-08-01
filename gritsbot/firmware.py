@@ -251,14 +251,14 @@ def main():
     last_input_msg = {}
 
     # Main loop for the robot
+    serial._serial.reset_input_buffer()
+    serial._serial.reset_output_buffer()
     while True:
         start_time = time.time()
 
         # Serial requests
         request = Request()
         handlers = []
-
-        serial._serial.reset_output_buffer()
 
         # Retrieve status data: battery voltage and charging status
         if((start_time - status_update_time) >= status_update_rate):

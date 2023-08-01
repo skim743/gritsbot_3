@@ -253,7 +253,7 @@ class GritsbotSerial:
                         self._serial = None
 
                     try:
-                        self._serial = serial.Serial(self._serial_dev, self._baud_rate, timeout=self._timeout)
+                        self._serial = serial.Serial(self._serial_dev, self._baud_rate, timeout=self._timeout, dsrdtr=False)
                         # If we succeeded, no longer need to restart serial
                         self._needs_restart = False
                         self._serial_cv.notify_all()
