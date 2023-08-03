@@ -142,6 +142,7 @@ class GritsbotSerial:
 
             try:
                 msg = self._serial.read()
+                time.sleep(0.01)
                 # msg = self._serial.read(self._serial.in_waiting)
             except Exception as e:
                 error_msg = 'Unable to read from serial port'
