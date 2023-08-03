@@ -17,31 +17,6 @@ void GritsbotX::SETUP(){
   //Set Pin Modes!
   ///////////////////////////////////////////////////////////
 
-  //IR Sensor Input Pins (Analog)
-  // pinMode(_IRF, INPUT);//Set the Center IR Pin to Input
-  // pinMode(_IRLF, INPUT);//Set the Left Forward IR Pin to Input
-  // pinMode(_IRL, INPUT);//Set the Left IR Pin to Input
-  // pinMode(_IRLB, INPUT);//Set the Back Left IR Pin to Input
-  // pinMode(_IRRB, INPUT);//Set the Back Right IR Pin to Input
-  // pinMode(_IRR, INPUT);//Set the Right IR Pin to Input
-  // pinMode(_IRRF, INPUT);//Set the Right Forward IR Pin to Input
-
-  //IR Sensor Enable Pins (Digital) Set High
-  // pinMode(_enIRF, OUTPUT);//Set the Center Enable IR Pin to Output
-  // digitalWrite(_enIRF, HIGH);
-  // pinMode(_enIRLF, OUTPUT);//Set the Left Forward Enable IR Pin to Output
-  // digitalWrite(_enIRLF, HIGH);
-  // pinMode(_enIRL, OUTPUT);//Set the Left Enable IR Pin to Output
-  // digitalWrite(_enIRL, HIGH);
-  // pinMode(_enIRLB, OUTPUT);//Set the Back Left Enable IR Pin to Output
-  // digitalWrite(_enIRLB, HIGH);
-  // pinMode(_enIRRB, OUTPUT);//Set the Back Right Enable IR Pin to Output
-  // digitalWrite(_enIRRB, HIGH);
-  // pinMode(_enIRR, OUTPUT);//Set the Right Enable IR Pin to Output
-  // digitalWrite(_enIRR, HIGH);
-  // pinMode(_enIRRF, OUTPUT);//Set the Right Forward Enable IR Pin to Output
-  // digitalWrite(_enIRRF, HIGH);
-
   //Battery Feedback Pins
   pinMode(_battChargingCheck, INPUT_PULLDOWN);//Set the Battery Charging Pin to Input,
   // use pulldown so when the charger is not connected the pin stays low.
@@ -133,6 +108,7 @@ float GritsbotX::convertUnicycleToLeftMotor(float vel, float w){
 ///////////////////////////////////////////////////////////
 
 void GritsbotX::jsonSerialRead(){
+  Serial3.clear();
   if(Serial3.available()){
     JsonObject& jsonIn = _jsonBufferIn.parseObject(Serial3);
     JsonObject& jsonOut = _jsonBufferOut.createObject();
@@ -161,7 +137,7 @@ void GritsbotX::jsonSerialRead(){
           else if (strcmp(ifaceStr,"charge_status") == 0){
             statusArray.add(1);
             body["charge_status"] = checkCharging();
-          }
+          }   
           break;
         }
         case 1://write
@@ -189,11 +165,13 @@ void GritsbotX::jsonSerialRead(){
         }
       }  
     }
-    // if(Serial3.available()){
-    jsonOut.printTo(Serial3);      
-    _jsonBufferOut.clear();
-    // }
-    _jsonBufferIn.clear();   
+    if(Serial3.availableForWrite() >= jsonOut.size()+1){
+      jsonOut.printTo(Serial3);
+      // jsonOut.printTo(Serial); // For debugging
+      // Serial.println(jsonOut.size()); // For debugging
+      _jsonBufferOut.clear();
+    }
+    _jsonBufferIn.clear();
   }
 }
 
@@ -289,84 +267,6 @@ float GritsbotX::checkBattVoltage(){
   // Read battery voltage from INA260
   // float battVoltage = ina260.readBusVoltage();
   return battVoltage;
-}
-
-void GritsbotX::disableIR(){ //Turns off the emitter of the IR sensors (Used for lowering power consumption).
-  // digitalWrite(_enIRF,LOW);
-  // digitalWrite(_enIRRF,LOW);
-  // digitalWrite(_enIRR,LOW);
-  // digitalWrite(_enIRRB,LOW);
-  // digitalWrite(_enIRLB,LOW);
-  // digitalWrite(_enIRL,LOW);
-  // digitalWrite(_enIRLF,LOW);
-}
-
-void GritsbotX::enableIR(){ //Turns on the emitter of the IR sensors..
-  // digitalWrite(_enIRF,HIGH);
-  // digitalWrite(_enIRRF,HIGH);
-  // digitalWrite(_enIRR,HIGH);
-  // digitalWrite(_enIRRB,HIGH);
-  // digitalWrite(_enIRLB,HIGH);
-  // digitalWrite(_enIRL,HIGH);
-  // digitalWrite(_enIRLF,HIGH);
-}
-
-    //TODO MAKE SURE CALIBRATION IS CORRECT
-
-void GritsbotX::readIR(float irData[]){
-  // Read and store the IR sensors in a clockwise fashion starting 
-  // from the front (curved edge) [Front, Right Forward, Right, 
-  // Back Right, Back Left, Left, Front Left].
-  // enableIR();
-  // _RDistance = analogRead(_IRR);
-  // _RFDistance = analogRead(_IRRF);
-  // _FDistance = analogRead(_IRF);
-  // _LFDistance = analogRead(_IRLF);
-  // _LDistance = analogRead(_IRL);
-  // _LBDistance = analogRead(_IRLB);
-  // _RBDistance = analogRead(_IRRB);
-
-  // irData[0] = _FDistance;
-  // irData[1] = _RFDistance;
-  // irData[2] = _RDistance;
-  // irData[3] = _RBDistance;
-  // irData[4] = _LBDistance;
-  // irData[5] = _LDistance;
-  // irData[6] = _LFDistance;
-
-/* 
-// Takes the value from the IR and converts it to a voltage.
-  
-  float voltsR = analogRead(_IRR)* 0.00322265625;   // value from right sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-  float voltsC = analogRead(IRC)* 0.00322265625;   // value from center sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-  float voltsL = analogRead(IRL)* 0.00322265625;   // value from left sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-  float voltsLF = analogRead(IRLF)* 0.00322265625;   // value from left forward sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-  float voltsRF = analogRead(IRRF)* 0.00322265625;   // value from right forward sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-  float voltsB = analogRead(IRB)* 0.00322265625;   // value from right forward sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
-*/  
-  
-  /* This calibration is for the Sharp GP2Y0A41SK0F IR distance sensor.(http://www.pololu.com/product/2464)
-  
-  This measures to the back of the sensor! If you want the distance to the lense subtract off the width of the sensor.
-    The units are in CM.
-  
-  This sensor has good accuracy from 4~30 cm then starts to get fuzzy.
-  
-  D=a/(V-b);
-  
-  a=15.68;
-  b=-0.03907;
- 
-  Width of the Sensor=1.3;
-  */
-/*
-     RDistance = a/(voltsR - b);
-     CDistance = a/(voltsC - b);
-     LDistance = a/(voltsL - b);
-     LFDistance = a/(voltsLF - b);
-     RFDistance = a/(voltsRF - b);
-     BDistance = a/(voltsB - b); 
-*/
 }
 
 void GritsbotX::_readEncoders(){

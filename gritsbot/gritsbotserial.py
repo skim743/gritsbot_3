@@ -56,7 +56,7 @@ class GritsbotSerial:
 
     """
 
-    def __init__(self, serial_dev='/dev/ttyAMA0', baud_rate=500000, timeout=5):
+    def __init__(self, serial_dev='/dev/ttyAMA0', baud_rate=500000, timeout=2):
         """Creates the serial communciations object.
 
         Args:
@@ -117,7 +117,6 @@ class GritsbotSerial:
                     raise RuntimeError(error_msg)
 
             msg = _json_to_bytes(msg)
-            logger.info('Size of the JSON message ({}) bytes'.format(len(msg)))
             self._serial.reset_input_buffer()
 
             try:
@@ -132,18 +131,9 @@ class GritsbotSerial:
                 self._serial_cv.notify_all()
                 raise RuntimeError(error_msg)
 
-            # Read to wait for bytes to be available
-            d_timeout = 5
-            d_startT = time.time()
-            while(self._serial.in_waiting == 0):
-                if (time.time() - d_startT) > d_timeout:
-                    logger.info('Read Timeout Occured')
-                    break
-
             try:
                 msg = self._serial.read()
-                time.sleep(0.01)
-                # msg = self._serial.read(self._serial.in_waiting)
+                time.sleep(0.01) # Wait for 10ms to account for the delay in UART
             except Exception as e:
                 error_msg = 'Unable to read from serial port'
                 logger.critical(error_msg)

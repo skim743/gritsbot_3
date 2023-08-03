@@ -27,12 +27,6 @@ class GritsbotX
     void turnOffLED(); // Turn off Neo Pixels.
     void rainbow(uint8_t wait); // Display a rainbow effect on the LED (CAUTION: INCLUDES A DELAY)
 
-    void readIR(float irData[]); // Read and store the IR sensors in a clockwise fashion starting 
-                                 // from the front (curved edge) [Front, Right Forward, Right, 
-                                 //Back Right, Back Left, Left, Front Left]. Enables the IR Emitter.
-    void disableIR(); //Turns off the emitter of the IR sensors (Used for lowering power consumption).
-    void enableIR(); //Turns on the emitter of the IR sensors.
-
     void getEncoderCounts(int encoderData[]); // Read and store the encoders tick counts in the argument array [Left, Right]
     bool checkCharging(); // Returns true if the battery is currently charging
     float checkBattVoltage(); // Reads and returns the current battery voltage
@@ -69,27 +63,6 @@ class GritsbotX
     ///////////////////////////////////////////////////////////
     //Pin Numbers Here
     ///////////////////////////////////////////////////////////
-
-    //Analog input pin numbers for IR distance sensors 
-
-    // static constexpr uint8_t _IRF = A14; // A14 // Analog input pin for forward distance sensor
-    // static constexpr uint8_t _IRLF = A0;// A0 // Analog input pin for left forward distance sensor
-    // static constexpr uint8_t _IRL = A4;// A4 // Analog input pin for left distance sensor
-    // static constexpr uint8_t _IRLB = A13;// A13 // Analog input pin for left back distance sensor
-    // static constexpr uint8_t _IRRB = A12;// A12 // Analog input pin for left back distance sensor
-    // static constexpr uint8_t _IRR = A15;// A15 // Analog input pin for right distance sensor
-    // static constexpr uint8_t _IRRF = A17;// A17 // Analog input pin for right forward distance sensor
-
-    //Digital output (control) pin numbers for enabling the IR LED on the distance sensors
-    //set high to enable and set low to disable (for low power operation/charging).
-
-    // static constexpr uint8_t _enIRF = 12; // D28 // Digital enable output pin for forward distance sensor
-    // static constexpr uint8_t _enIRLF = 15;// D15 // Digital enable output pin for left forward distance sensor
-    // static constexpr uint8_t _enIRL = 19;// D19 // Digital enable output pin for left distance sensor
-    // static constexpr uint8_t _enIRLB = 33;// D33 // Digital enable outputAnalog input pin for left back distance sensor
-    // static constexpr uint8_t _enIRRB = 24;// D24 // Digital enable output pin for left back distance sensor
-    // static constexpr uint8_t _enIRR = 25;// D25 // Digital enable output pin for right distance sensor
-    // static constexpr uint8_t _enIRRF = 27;// D27 // Digital enable output pin for right forward distance sensor
 
     //Motor control pins
 

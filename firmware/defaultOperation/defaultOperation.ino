@@ -14,18 +14,16 @@ void setup() {
   myRobot.SETUP();
   myRobot.rainbow(10);
   myRobot.turnOffLED();
-  myRobot.disableIR();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  myRobot.getEncoderCounts(garbage);
-  myRobot.checkCharging();
-  if (myRobot.checkCharging()){ //If we're charging disable unnecessary current draws.
-    myRobot.disableIR();
-    //myRobot.turnOffLED();
-  }
-  myRobot.checkBattVoltage();
+//  myRobot.getEncoderCounts(garbage);
+//  myRobot.checkCharging();
+//  if (myRobot.checkCharging()){ //If we're charging disable unnecessary current draws.
+//    myRobot.disableIR();
+//    myRobot.turnOffLED();
+//  }
+//  myRobot.checkBattVoltage();
 
   myRobot.jsonSerialRead();
   myRobot.communicationCheck(500);
@@ -33,10 +31,11 @@ void loop() {
 
 // For debugging purposes
 //  myRobot.PIDMotorControl(1.0, 1.0);
-//  myRobot.moveR(50);
-//  myRobot.moveL(50);
+//  myRobot.moveR(100);
+//  myRobot.moveL(100);
 //  delay(3000);
 //  myRobot.noMotion();
 //  delay(3000);
 //  Serial.println(myRobot.checkBattVoltage());
+//  Serial.println(myRobot.checkCharging());
 }
