@@ -117,6 +117,7 @@ class GritsbotSerial:
                     raise RuntimeError(error_msg)
 
             msg = _json_to_bytes(msg)
+            logger.info('Size of the JSON message ({}) bytes'.format(len(msg)))
             self._serial.reset_input_buffer()
 
             try:
