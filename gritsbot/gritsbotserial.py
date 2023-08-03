@@ -56,7 +56,7 @@ class GritsbotSerial:
 
     """
 
-    def __init__(self, serial_dev='/dev/ttyAMA0', baud_rate=5000000, timeout=5):
+    def __init__(self, serial_dev='/dev/ttyAMA0', baud_rate=500000, timeout=5):
         """Creates the serial communciations object.
 
         Args:
@@ -131,6 +131,12 @@ class GritsbotSerial:
                 raise RuntimeError(error_msg)
 
             # Read to wait for bytes to be available
+            d_timeout = 2
+            d_startT = time.time()
+            while(self._serial.in_waiting == 0):
+                if (time.time() - d_startT) > d_timeout:
+                    break
+
             try:
                 msg = self._serial.read()
                 # msg = self._serial.read(self._serial.in_waiting)
