@@ -117,6 +117,7 @@ class GritsbotSerial:
                     raise RuntimeError(error_msg)
 
             msg = _json_to_bytes(msg)
+            self._serial.reset_input_buffer()
 
             try:
                 self._serial.write(msg)
@@ -131,10 +132,11 @@ class GritsbotSerial:
                 raise RuntimeError(error_msg)
 
             # Read to wait for bytes to be available
-            d_timeout = 2
+            d_timeout = 5
             d_startT = time.time()
             while(self._serial.in_waiting == 0):
                 if (time.time() - d_startT) > d_timeout:
+                    logger.info('Read Timeout Occured')
                     break
 
             try:
