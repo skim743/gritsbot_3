@@ -137,7 +137,19 @@ void GritsbotX::jsonSerialRead(){
           else if (strcmp(ifaceStr,"charge_status") == 0){
             statusArray.add(1);
             body["charge_status"] = checkCharging();
-          }   
+          }  
+          else if (strcmp(ifaceStr,"bus_voltage") == 0){
+            statusArray.add(1);
+            body["bus_volt"] = ina260.readBusVoltage();
+          }
+          else if (strcmp(ifaceStr,"bus_current") == 0){
+            statusArray.add(1);
+            body["bus_current"] = ina260.readCurrent();
+          }
+          else if (strcmp(ifaceStr,"power") == 0){
+            statusArray.add(1);
+            body["power"] = ina260.readPower();
+          } 
           break;
         }
         case 1://write
