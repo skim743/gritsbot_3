@@ -138,7 +138,7 @@ void GritsbotX::jsonSerialRead(){
             statusArray.add(1);
             body["charge_status"] = checkCharging();
           }  
-          else if (strcmp(ifaceStr,"bus_voltage") == 0){
+          else if (strcmp(ifaceStr,"bus_volt") == 0){
             statusArray.add(1);
             body["bus_volt"] = ina260.readBusVoltage();
           }

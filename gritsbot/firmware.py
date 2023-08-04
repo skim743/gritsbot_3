@@ -328,7 +328,7 @@ def main():
             # Ensure the appropriate handler gets each response
             for i, handler in enumerate(handlers):
                 status_data.update(handler(status[i], body[i]))
-            logger.info('Status data ({})'.format(status_data))
+            # logger.info('Status data ({})'.format(status_data))
             logger.info('Response ({})'.format(response))
             # logger.info('Length of handlers ({})'.format(len(handlers))) # For debugging
         else:
@@ -340,10 +340,10 @@ def main():
         robot_node.put(status_link, json.dumps(status_data))
 
         # Print out status data
-        # if((start_time - print_time) >= status_update_rate):
-        #     logger.info('Status data ({})'.format(status_data))
-        #     logger.info('Last input message received ({})'.format(last_input_msg))
-        #     print_time = time.time()
+        if((start_time - print_time) >= status_update_rate):
+            logger.info('Status data ({})'.format(status_data))
+            logger.info('Last input message received ({})'.format(last_input_msg))
+            print_time = time.time()
 
         # Sleep for whatever time is left at the end of the loop
         time.sleep(max(0, update_rate - (time.time() - start_time)))
