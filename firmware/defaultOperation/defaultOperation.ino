@@ -24,7 +24,7 @@ void loop() {
 //    myRobot.turnOffLED();
 //  }
 //  myRobot.checkBattVoltage();
-
+//
   myRobot.jsonSerialRead();
   myRobot.communicationCheck(500);
   myRobot.followCommands();
