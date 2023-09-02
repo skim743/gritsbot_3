@@ -90,6 +90,15 @@ Reboot the Pi to apply the new network host name by selecting 'yes' when the ras
 sudo reboot
 ```
 
+In case of using Raspberry Pi 3 and 4, serial settings needs to be modified to enable UART communication. For this,
+Run
+```
+sudo raspi-config
+```
+on the Pi, and go to 'Interface Options' - 'Interface Options' - 'Serial Port'
+Select 'No' for 'Would you like a login shell to be accessible over serial?'
+and 'Yes' for 'Would you like the serial port hardware to be enabled?'
+
 # 4 - Manual Installation
 
 This section details the installation process for the firmware.  This process can be made automatic via the setup scripts.
